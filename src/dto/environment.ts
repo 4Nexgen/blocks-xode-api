@@ -2,7 +2,7 @@
 
 export const environment = {
     
-    keypair: localStorage.getItem("wallet-keypair") || "",
+    keypair: "wallet-keypair",
     WalletAPIURL: "https://wallet-api.xode.net",
     secret_key: "^a7T&kPzL#9s@4!gF%8H",
     networks: [
