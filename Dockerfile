@@ -1,14 +1,16 @@
-FROM node:18.16.1-alpine
+# Build
+FROM node:22.11.0-alpine
 
-WORKDIR /app
-
-COPY package.json .
-
-RUN npm install -g npm@9.8.1
-RUN npm install
+WORKDIR /usr/src/app
 
 COPY . .
 
+COPY package*.json  ./
+
+RUN npm install --legacy-peer-deps
+
+RUN npm run build
+
 EXPOSE 3020
 
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "start:prod"]
