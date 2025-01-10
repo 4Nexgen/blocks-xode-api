@@ -3,26 +3,26 @@ name: staging_deployment
 on:
   push:
     tags:
-      - 'v*-staging'
+      - 'v*-staging'  # Correct tag pattern, matches tags like v1-staging, v2-staging, etc.
 
 jobs:
   build_and_deploy:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-22.04  # Ensure the correct runner
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v2  # Correctly using GitHub checkout action
       - name: Build Docker image
-        run: docker build -t ${{ secrets.DOCKER_HUB_NAMESPACE_STAGING }}/blocks-xode-api:latest .
+        run: docker build -t ${{ secrets.DOCKER_HUB_NAMESPACE_STAGING }}/blocks-xode-api:latest .  # Build the Docker image
       - name: Push image to DockerHub
         run: |
-          docker login -u ${{ secrets.DOCKER_HUB_USERNAME_STAGING }} -p ${{ secrets.DOCKER_HUB_PASSWORD_STAGING }}
-          docker push ${{ secrets.DOCKER_HUB_NAMESPACE_STAGING }}/blocks-xode-api:latest
+          docker login -u ${{ secrets.DOCKER_HUB_USERNAME_STAGING }} -p ${{ secrets.DOCKER_HUB_PASSWORD_STAGING }}  # Docker login
+          docker push ${{ secrets.DOCKER_HUB_NAMESPACE_STAGING }}/blocks-xode-api:latest  # Push the Docker image
       - name: SSH to Xgame Server
         run: |
-          mkdir ~/.ssh
-          echo -e "${{ secrets.STAGING_PRIVATE_KEY }}" > ~/.ssh/ssh-key
-          chmod 400 ~/.ssh/ssh-key
+          mkdir ~/.ssh  # Setup SSH
+          echo -e "${{ secrets.STAGING_PRIVATE_KEY }}" > ~/.ssh/ssh-key  # Add private key
+          chmod 400 ~/.ssh/ssh-key  # Secure SSH key
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/ssh-key ${{ secrets.STAGING_USERNAME }}@${{ secrets.STAGING_HOST }} -p ${{ secrets.STAGING_SSH_PORT }} \
             'cd ${{ secrets.STAGING_PATH }} && \
             docker login -u ${{ secrets.DOCKER_HUB_USERNAME_STAGING }} -p ${{ secrets.DOCKER_HUB_PASSWORD_STAGING }} && \
-            sh deploy_production.sh'
+            sh deploy_production.sh'  # SSH into server and run the deployment script
