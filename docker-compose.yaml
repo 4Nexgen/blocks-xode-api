@@ -2,20 +2,11 @@ version: "3.9"
 
 services:
   app:
-    build:
-        dockerfile: Dockerfile
+    image: xoderockson/blocks-xode-api:latest
     container_name: blocks-xode-api
-    platform: linux/amd64
     env_file:
       - .env
     ports:
       - 3020:3020
-
-  copy-blocks-xode-env:
-    build:
-        dockerfile: Dockerfile
-    container_name: copy-blocks-xode-env
-    platform: linux/amd64
     volumes:
-      - /var/www/testing/blocks-xode-api/.env:/temp/.env
-    command: sh -c "cp /temp/.env /app/.env && exit"
+      - /var/www/testing/blocks-xode-api/.env:/usr/src/app/.env
