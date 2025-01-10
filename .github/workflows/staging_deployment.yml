@@ -3,7 +3,7 @@ name: staging_deployment
 on:
   push:
     tags:
-      - v**-staging
+      - 'v*-staging'
 
 jobs:
   build_and_deploy:
