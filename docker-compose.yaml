@@ -6,6 +6,6 @@ services:
     container_name: blocks-xode-api
   
     ports:
-      - 3020:3020
+      - 3020:3000
     volumes:
       - /var/www/testing/blocks-xode-api:/usr/src/app/
