@@ -4,9 +4,8 @@ services:
   app:
     image: xoderockson/blocks-xode-api:latest
     container_name: blocks-xode-api
-    env_file:
-      - .env
+  
     ports:
       - 3020:3020
     volumes:
-      - /var/www/testing/blocks-xode-api/.env:/usr/src/app/.env
+      - /var/www/testing/blocks-xode-api:/usr/src/app/
