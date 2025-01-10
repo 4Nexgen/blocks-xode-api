@@ -25,4 +25,4 @@ jobs:
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/ssh-key ${{ secrets.STAGING_USERNAME }}@${{ secrets.STAGING_HOST }} -p ${{ secrets.STAGING_SSH_PORT }} \
             'cd ${{ secrets.STAGING_PATH }} && \
             docker login -u ${{ secrets.DOCKER_HUB_USERNAME_STAGING }} -p ${{ secrets.DOCKER_HUB_PASSWORD_STAGING }} && \
-            sh deploy_staging.sh'
+            sh deploy_production.sh'
