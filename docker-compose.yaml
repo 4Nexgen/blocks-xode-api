@@ -1,11 +1,7 @@
-version: "3.9"
-
 services:
   app:
     image: xoderockson/blocks-xode-api:latest
     container_name: blocks-xode-api
-  
     ports:
       - 3021:3000
-    volumes:
-      - /var/www/testing/blocks-xode-api:/usr/src/app/
+
