@@ -11,6 +11,6 @@ RUN npm install --legacy-peer-deps
 
 RUN npm run build
 
-EXPOSE 3020
+EXPOSE 3021
 
 CMD ["npm", "run", "start:prod"]
