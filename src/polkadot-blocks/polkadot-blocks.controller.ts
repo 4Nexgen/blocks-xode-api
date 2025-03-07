@@ -12,6 +12,7 @@ export class PolkadotBlocksController {
     
     @Get(':network')
     async getNetworkScanner(@Param('network') network_str: string, @Req() request: Request):  Promise<NetworkScannerModel>{
+        try {
 
         // const wsProvider_local = environment.networks[0];
         const wsProvider_local = environment.networks.find((network) => network.network[0].net_name === network_str);
@@ -32,5 +33,9 @@ export class PolkadotBlocksController {
         network_model.net_name = wsProvider_local.network[0].net_name;
 
         return network_model;
+        }
+        catch(error) {
+            throw error;
+        }
     }
 }
